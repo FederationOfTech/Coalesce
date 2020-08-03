@@ -1,4 +1,4 @@
-# Coalesce
+# coalesce
 
 [![Build Status](https://travis-ci.org/FederationOfTech/coalesce.svg?branch=master)](https://travis-ci.org/FederationOfTech/coalesce)
 [![Built with](https://img.shields.io/badge/Built_with-Cookiecutter_Django_Rest-F7B633.svg)](https://github.com/agconti/cookiecutter-django-rest)
@@ -9,15 +9,16 @@ An open source volunteer management platform. Check out the project's [documenta
 
 - [Docker](https://docs.docker.com/docker-for-mac/install/)
 
-# Local Development
+# Initialize the project
 
 Start the dev server for local development:
+
 ```bash
 docker-compose up
 ```
 
-Run a command inside the docker container:
+Create a superuser to login to the admin:
 
 ```bash
-docker-compose run --rm web [command]
+docker-compose run --rm web ./manage.py createsuperuser
 ```
