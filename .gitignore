@@ -113,3 +113,7 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# editors
+*.code-workspace
+*.vscode

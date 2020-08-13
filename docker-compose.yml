@@ -1,12 +1,21 @@
-version: '2'
+version: '3'
 
 services:
   postgres:
-    image: postgres:11.6
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
   web:
     restart: always
     environment:
       - DJANGO_SECRET_KEY=local
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
     image: web
     build: ./
     command: >
@@ -19,6 +28,8 @@ services:
       - "8000:8000"
     depends_on:
       - postgres
+    links:
+      - postgres:postgres
   documentation:
     restart: always
     build: ./
