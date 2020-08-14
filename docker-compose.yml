@@ -9,14 +9,14 @@ services:
       - POSTGRES_PASSWORD=postgres
     ports:
       - "5432:5432"
-  web:
+  api:
     restart: always
     environment:
       - DJANGO_SECRET_KEY=local
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-    image: web
+    image: api
     build: ./
     command: >
       bash -c "python wait_for_postgres.py &&
@@ -30,6 +30,16 @@ services:
       - postgres
     links:
       - postgres:postgres
+  frontend:
+    image: frontend
+    build: ./frontend/coalesce/
+    command: quasar dev
+    ports:
+      - "8080:8080"
+    depends_on:
+      - api
+    links:
+      - api:api
   documentation:
     restart: always
     build: ./
