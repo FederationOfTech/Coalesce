@@ -20,7 +20,7 @@ Some features you can expect from Coalesce are:
 
 # Prerequisites
 
-- Docker[Mac](https://docs.docker.com/docker-for-mac/install/) [Windows] (https://docs.docker.com/docker-for-windows/install/)
+- Docker [Mac](https://docs.docker.com/docker-for-mac/install/) or [Windows](https://docs.docker.com/docker-for-windows/install/) 
 
 # Local Development
 
