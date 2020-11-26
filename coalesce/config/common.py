@@ -25,6 +25,7 @@ class Common(Configuration):
         # Your apps
         'coalesce.users',
         'coalesce.opportunities',
+        'coalesce.organizers',
 
     )
 

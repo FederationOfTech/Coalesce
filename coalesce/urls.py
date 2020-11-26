@@ -10,11 +10,13 @@ from rest_framework_simplejwt.views import (
 )
 from .opportunities.views import OpportunityViewSet
 from .users.views import UserViewSet, UserCreateViewSet
+from .organizers.views import OrganizerCreateViewSet
 
 router = DefaultRouter()
 router.register(r"users", UserViewSet)
 router.register(r"users", UserCreateViewSet)
 router.register(r'opportunities', OpportunityViewSet)
+router.register(r"organizers", OrganizerCreateViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
