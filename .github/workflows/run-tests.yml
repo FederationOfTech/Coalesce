@@ -30,6 +30,9 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: Run flake8 to check our code follows the python style guide
+        run: flake8
+
       - name: Run tests
         run: ./manage.py test
         env:
