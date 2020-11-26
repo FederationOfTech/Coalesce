@@ -40,6 +40,9 @@ services:
       - api
     links:
       - api:api
+    volumes:
+      - ./frontend/coalesce/src/:/app/src/:z
+      - ./frontend/coalesce/quasar.conf.js:/app/quasar.conf.js:z
   documentation:
     restart: always
     build: ./
