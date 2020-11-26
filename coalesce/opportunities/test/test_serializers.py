@@ -2,8 +2,8 @@ from django.forms.models import model_to_dict
 from django.test import TestCase
 from nose.tools import eq_, ok_
 
-from coalesce.opportunities.serializers import CreateOpportunitySerializer
-from coalesce.opportunities.test.factories import OpportunityFactory
+from ..serializers import CreateOpportunitySerializer
+from .factories import OpportunityFactory
 
 
 class TestCreateOpportunitySerializer(TestCase):

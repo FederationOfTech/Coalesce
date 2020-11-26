@@ -1,11 +1,11 @@
 from rest_framework import serializers
-from coalesce.opportunities.models import Opportunity
+from .models import Opportunity
 
 class OpportunitySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Opportunity
-        fields = ('title', 'timestamp', 'description')
+        fields = ('id', 'title', 'timestamp', 'description')
 
 
 class CreateOpportunitySerializer(serializers.ModelSerializer):

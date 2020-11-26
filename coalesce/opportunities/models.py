@@ -1,6 +1,9 @@
+import uuid
+
 from django.db import models
 
 class Opportunity(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    timestamp = models.DateTimeField(auto_now=True)
     title = models.TextField()
-    timestamp = models.DateTimeField()
     description = models.TextField()
