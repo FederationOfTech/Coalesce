@@ -1,13 +1,21 @@
 <template>
   <q-page>
-    <div class="row">
+    <div class="row q-pt-lg">
       <div class="col-8 q-pa-md">
         <!-- search for an opportunity -->
-        <q-card class="q-mb-md">
+        <q-card class="q-mb-md q-pa-md">
           <q-card-section>
-            <div class="text-h3">Search for opportunities</div>
-            <div class="text-body1">Gain experience with hands-on training, share your expertise and work with others across the government.</div>
+            <div class="text-h3 text-weight-bold q-mb-md">Search for opportunities</div>
+            <div class="text-subtitle1">Gain experience with hands-on training, share your expertise and work with others across the government.</div>
           </q-card-section>
+          <!-- search bar -->
+          <q-toolbar>
+            <q-input class="search-bar" rounded outlined v-model="text">
+              <template v-slot:append>
+                <q-icon name="search" />
+              </template>
+            </q-input>
+          </q-toolbar>
         </q-card>
 
         <!-- list all opportunities -->
@@ -24,17 +32,18 @@
 
               <q-separator />
 
-              <q-card-actions align="left">
+              <q-card-actions align="left" class="text-blue">
                 <q-btn flat>Open</q-btn>
               </q-card-actions>
             </q-card>
           </div>
         </div>
-
       </div>
+
+      <!-- filtering -->
       <div class="col-4">
         <q-card class="q-pa-md q-ma-md">
-          Filter
+          <div class="text-h5 text-weight-bold">Filter</div>
         </q-card>
       </div>
     </div>
