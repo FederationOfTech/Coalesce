@@ -11,3 +11,9 @@ class CreateVolunteerSerializer(serializers.ModelSerializer):
         model = Volunteer
         fields = ('description', 'skills', 'organization', 'user',)
         read_only_fields = ('user',)
+
+class VolunteerDetailsSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Volunteer
+        fields = ('description', 'skills', 'organization', 'user',)

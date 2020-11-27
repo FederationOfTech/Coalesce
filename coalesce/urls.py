@@ -11,14 +11,15 @@ from rest_framework_simplejwt.views import (
 from .opportunities.views import OpportunityViewSet
 from .users.views import UserViewSet, UserCreateViewSet
 from .organizers.views import OrganizerCreateViewSet
-from .volunteers.views import VolunteerCreateViewSet
+from .volunteers.views import VolunteerCreateViewSet, VolunteerViewSet
 
 router = DefaultRouter()
 router.register(r"users", UserViewSet)
 router.register(r"users", UserCreateViewSet)
-router.register(r'opportunities', OpportunityViewSet)
+router.register(r"opportunities", OpportunityViewSet)
 router.register(r"organizers", OrganizerCreateViewSet)
 router.register(r"volunteers", VolunteerCreateViewSet)
+router.register(r"volunteers", VolunteerViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
