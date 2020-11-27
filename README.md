@@ -71,4 +71,4 @@ or connect to `localhost` on port `5432` using a local postgresql client.
 
 # Documentation
 
-Check out the project's [documentation](http://FederationOfTech.github.io/coalesce/).
+Check out the project's [documentation](https://FederationOfTech.github.io/Coalesce/).
