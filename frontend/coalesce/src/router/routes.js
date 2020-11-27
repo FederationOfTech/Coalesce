@@ -1,6 +1,14 @@
 
 const routes = [
   {
+    path: '/opportunities',
+    component: () => import('layouts/BasicLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/OpportunitiesSearchPage.vue') }
+    ]
+  },
+
+  {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
