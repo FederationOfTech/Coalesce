@@ -30,10 +30,10 @@
                 <div class="text-body2">{{ opportunity.number_of_volenteers_needed }}</div>
                 <div class="text-subtitle1 text-weight-bold
 ">Commitment</div>
-                <div class="text-body2">{{ opportunity.commitment }}</div>
+                <div class="text-body2">{{ opportunity.commitment }} hours</div>
                 <div class="text-subtitle1 text-weight-bold
 ">Estimated completion date</div>
-                <div class="text-body2">{{ opportunity.completion_date }} hours</div>
+                <div class="text-body2">{{ opportunity.completion_date }}</div>
                 <div class="text-subtitle1 text-weight-bold
 ">Location</div>
                 <div class="text-body2">{{ opportunity.location }}</div>
