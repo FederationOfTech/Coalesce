@@ -8,11 +8,13 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+from .opportunities.views import OpportunityViewSet
 from .users.views import UserViewSet, UserCreateViewSet
 
 router = DefaultRouter()
 router.register(r"users", UserViewSet)
 router.register(r"users", UserCreateViewSet)
+router.register(r'opportunities', OpportunityViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
