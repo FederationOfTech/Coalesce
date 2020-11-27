@@ -5,9 +5,9 @@ class Opportunity(models.Model):
 
     background_check_requirements = models.TextField()
     commitment_type = models.TextField()
-    datetime = models.DateTimeField(help_text="Event date")
+    datetime = models.DateTimeField()
     description = models.TextField()
-    clothing_requirements = models.TextField()
+    clothing_requirements = models.TextField(blank=True)
     # TODO image = models.ChartField(max_length=30)  # this should be ref to a stored image url
     location = models.TextField()
     # TODO organizer = models.ManyToManyRel()
