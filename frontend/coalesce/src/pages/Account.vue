@@ -1,4 +1,5 @@
-<!--<template>-->
+<template>
+  <q-page>
 <!-- Load an icon library -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -10,10 +11,25 @@
   </div>
 </div>
 
-<section class="banner">
-    <div class="text-h3">{{ user.username }}</div>
-    <div class="text-h6">Your email: {{user.organisation}}</div>
-</section>
+<div class="banner">
+      <div class="text-h3">{{ user.username }}</div>
+      <div class="text-h6">Your email: {{user.organisation}}</div>
+</div>
+
+<div class="q-pa-md row items-start q-gutter-md">
+        <q-card class="my-card">
+          <q-card-section horizontal class="profile_info">
+            <img class= "col-5" src="~assets/icon.png">
+          </q-card-section>
+          <q-separator/>
+           <q-card-section>
+              About
+             <div class="text-h3">{{user.about}}</div>
+          </q-card-section>
+    </q-card>
+     </div>
+  </q-page>
+</template>
 
  <!--
     <q-page-container>
@@ -26,10 +42,8 @@
       </div>
        <div class="text-h6">
         Full name: {{user.fullname}}
-      </div>
-    </q-page-container>
-</template>-->
 
+    </q-page-container>-->
 <script>
 // eslint-disable-next-line no-unused-vars
 const user =
@@ -38,7 +52,8 @@ const user =
     email: 'email@email.com',
     fullname: 'Abcdef ghijklmn',
     photolink: 'icon.png',
-    organisation: 'Federation of Sleuths'
+    organisation: 'Federation of Sleuths',
+    about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'
   }
 
 export default {
@@ -83,13 +98,21 @@ export default {
 }
 .banner{
   background-color: #26A69A;
+  height: 150px;
 }
 .text-h3{
-  color: #dddddd;
-  opacity: 0.5;
+  color: #f2f2f2;
+  opacity: 0.9;
 }
 .text-h6{
-  color: #dddddd;
-  opacity: 0.5;
+  color: #f2f2f2;
+  opacity: 0.9;
+}
+.profile_info img{
+  width:300px;
+  height:300px;
+}
+.my-card{
+
 }
 </style>

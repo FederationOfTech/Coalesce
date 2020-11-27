@@ -14,7 +14,7 @@ const routes = [
     children: [
       { path: 'index', component: () => import('pages/Index.vue') },
       { path: 'login', component: () => import('pages/LogIn.vue') },
-      { path: 'account', component: () => import('pages/Account.html') }
+      { path: 'account', component: () => import('pages/Account') }
     ]
   },
 
