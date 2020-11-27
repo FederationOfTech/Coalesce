@@ -20,7 +20,7 @@ export function obtainToken (context, { username, password }) {
 
 export function refreshToken () {
   const payload = {
-    refresh: this.state.jwt.refresh
+    refresh: this.state.jwt.refreshgit
   }
   this.$axios.post(this.state.endpoints.refreshJWT, payload)
     .then((response) => {

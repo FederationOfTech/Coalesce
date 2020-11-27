@@ -117,4 +117,5 @@ venv.bak/
 # editors
 *.code-workspace
 *.vscode
-.idea
+*.idea
+
