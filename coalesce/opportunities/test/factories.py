@@ -12,7 +12,7 @@ class OpportunityFactory(factory.django.DjangoModelFactory):
     datetime = datetime.datetime.fromisoformat("2020-11-26T10:50:31+00:00")
     description = "test-description"
     clothing_requirements = "test-clothing"
-    id = factory.Faker('uuid4')
+    id = 1
     location = "test-location"
     personnel_needed = 10
     post_privacy = "public"
