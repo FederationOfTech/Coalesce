@@ -3,7 +3,6 @@ import datetime
 
 
 class TrainingDetailsFactory(factory.django.DjangoModelFactory):
-
     class Meta:
         model = 'training_details.TrainingDetails'
 
@@ -11,4 +10,3 @@ class TrainingDetailsFactory(factory.django.DjangoModelFactory):
     name = 'Test Training'
     link = 'https://www.federationof.tech/'
     date = datetime.date.fromisoformat('2020-11-27')
-
