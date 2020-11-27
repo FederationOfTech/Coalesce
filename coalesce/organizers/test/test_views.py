@@ -13,14 +13,11 @@ class TestOrganizerCreate(APITestCase):
 
     def setUp(self):
         self.user = UserFactory()
+        self.client.credentials(HTTP_AUTHORIZATION=f'Token {self.user.auth_token}')
         self.url = reverse('organizer-list')
 
-    def test_post_request_with_no_data_fails(self):
-        response = self.client.post(self.url, {})
-        eq_(response.status_code, status.HTTP_400_BAD_REQUEST)
-
     def test_post_request_with_valid_data_succeeds(self):
-        response = self.client.post(self.url, {'user': self.user.id})
+        response = self.client.post(self.url, {})
         eq_(response.status_code, status.HTTP_201_CREATED)
 
         organizer = Organizer.objects.get(pk=response.data.get('user'))
