@@ -6,7 +6,7 @@
         <q-card class="q-mb-md q-pa-md">
           <q-card-section>
             <div class="text-h3 text-weight-bold q-mb-md">Search for opportunities</div>
-            <div class="text-subtitle1">Gain experience with hands-on training, share your expertise and work with others across the government.</div>
+            <div class="text-subtitle1">Contribute to your local community through applying for volunteering opportunities near you..</div>
           </q-card-section>
           <!-- search bar -->
           <q-toolbar>
@@ -108,7 +108,6 @@ export default {
   },
   computed: {
     filterOpportunity: function () {
-      console.log('here')
       if (!this.filter && !this.filterDate) {
         return this.opportunities
       }
