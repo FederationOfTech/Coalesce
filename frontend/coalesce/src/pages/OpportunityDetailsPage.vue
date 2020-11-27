@@ -97,7 +97,6 @@ const opportunity = {
   location: 'virtual',
   completed: false
 }
-
 export default {
   name: 'OpportunitiesSearchPage',
   data () {
