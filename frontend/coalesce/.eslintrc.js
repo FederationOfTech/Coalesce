@@ -54,6 +54,7 @@ module.exports = {
     // allow paren-less arrow functions
     'arrow-parens': 'off',
     'one-var': 'off',
+    "camelcase": "off",
 
     'import/first': 'off',
     'import/named': 'error',
