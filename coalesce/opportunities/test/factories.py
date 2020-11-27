@@ -15,7 +15,7 @@ class OpportunityFactory(factory.django.DjangoModelFactory):
     id = factory.Faker('uuid4')
     location = "test-location"
     personnel_needed = "test-personnel"
-    post_privacy = 0
+    post_privacy = "public"
     skills_required = "test-skills"
     title = "test-opportunity"
     training_requirements = "test-training-requirements"
