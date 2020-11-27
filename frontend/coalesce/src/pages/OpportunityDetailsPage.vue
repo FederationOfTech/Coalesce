@@ -7,7 +7,13 @@
             <div class="text-h5 q-pt-lg">{{ opportunity.title }}</div>
           </q-card-section>
           <q-card-section>
-            <!-- -->
+            <q-chip v-if="this.opportunity.accepting_applications" size="lg" icon="circle" color="green">Accepting Applications</q-chip>
+            <q-chip v-if="!this.opportunity.accepting_applications" size="lg" icon="circle" color="red">Accepting Applications</q-chip>
+          </q-card-section>
+          <q-card-section style="display: flow-root">
+            <div v-for="s in opportunity.skills_required" v-bind:key="s">
+              <q-chip size="md" style="float:right;">{{ s }}</q-chip>
+            </div>
           </q-card-section>
         </q-card>
         <q-card class="q-mb-md">
@@ -37,28 +43,31 @@
       <div class="col-4">
         <q-card class="q-pa-md q-ma-md">
           <div class="text-h5 text-weight-bold q-pb-md">Progress</div>
-          <div class="row">
+          <div class="row q-pb-lg">
             <div class="col" style="display:block">
-              <q-icon class="centre-icon large-icon" name="remove_red_eye" />
+              <q-icon v-if="this.opportunity.accepting_applications" class="centre-icon large-icon" name="remove_red_eye" color="green" />
+              <q-icon v-if="!this.opportunity.accepting_applications" class="centre-icon large-icon" name="remove_red_eye" color="grey" />
               <div class="text-body2" style="text-align: center">Accepting Applications</div>
             </div>
             <div class="col">
-              <q-icon class="centre-icon small-icon" name="arrow_forward" />
+              <q-icon class="centre-icon small-icon" name="arrow_forward" color="grey" />
             </div>
             <div class="col">
-              <q-icon class="centre-icon large-icon" name="refresh" />
+              <q-icon v-if="this.opportunity.preparing_onboarding" class="centre-icon large-icon" name="refresh" color="green" />
+              <q-icon v-if="!this.opportunity.preparing_onboarding" class="centre-icon large-icon" name="refresh" color="grey" />
               <div class="text-body2">Preparing Onboarding</div>
             </div>
             <div class="col">
-              <q-icon class="centre-icon small-icon" name="arrow_forward" />
+              <q-icon class="centre-icon small-icon" name="arrow_forward" color="grey" />
             </div>
             <div class="col">
-              <q-icon class="centre-icon large-icon" name="check" />
+              <q-icon v-if="this.opportunity.completed" class="centre-icon large-icon" name="check" color="green" />
+              <q-icon v-if="!this.opportunity.completed" class="centre-icon large-icon" name="check" color="grey" />
               <div class="text-body2">Complete</div>
             </div>
           </div>
 
-          <q-btn label="APPLY NOW" @click="clearDateFilter" color="primary" />
+          <q-btn label="APPLY NOW" @click="clearDateFilter" class="full-width q-mt-lg" color="primary" />
         </q-card>
       </div>
     </div>
@@ -73,6 +82,7 @@ const opportunity = {
   title: 'My opportunity 1',
   description: 'Description of the opportunity',
   accepting_applications: true,
+  preparing_onboarding: false,
   skills_required: [
     'skill1', 'skill2'
   ],
@@ -80,37 +90,15 @@ const opportunity = {
   number_of_volenteers_needed: 4,
   commitment: 20,
   completion_date: '2020/01/14',
-  location: 'virtual'
+  location: 'virtual',
+  completed: false
 }
 
 export default {
   name: 'OpportunitiesSearchPage',
   data () {
     return {
-      opportunity: opportunity,
-      filter: '',
-      filterDate: ''
-    }
-  },
-  computed: {
-    filterOpportunity: function () {
-      if (!this.filter && !this.filterDate) {
-        return this.opportunities
-      }
-
-      let results = this.opportunities.filter(o => {
-        return o.title.toLowerCase().indexOf(this.filter.toLowerCase()) > -1
-      })
-
-      results = results.filter(o => {
-        return o.date.toLowerCase().indexOf(this.filterDate.toLowerCase()) > -1
-      })
-      return results
-    }
-  },
-  methods: {
-    clearDateFilter () {
-      this.filterDate = ''
+      opportunity: opportunity
     }
   }
 }
