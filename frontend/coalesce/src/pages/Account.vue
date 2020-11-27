@@ -50,20 +50,6 @@
   </div>
   </q-page>
 </template>
-
- <!--
-    <q-page-container>
-    <div class="text-h3">Welcome {{ user.username }}!</div>
-      <div>
-        <img src="frontend/coalesce/src/assets/icon.png">
-      </div>
-      <div class="text-h6">
-        Your email: {{user.email}}
-      </div>
-       <div class="text-h6">
-        Full name: {{user.fullname}}
-
-    </q-page-container>-->
 <script>
 // eslint-disable-next-line no-unused-vars
 const user =
