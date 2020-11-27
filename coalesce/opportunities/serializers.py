@@ -5,15 +5,17 @@ class OpportunitySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Opportunity
-        fields = ('id', 'title', 'timestamp', 'description')
-
-
-class CreateOpportunitySerializer(serializers.ModelSerializer):
-
-    def create(self, validated_data):
-        opportunity = Opportunity.objects.create(**validated_data)
-        return opportunity
-
-    class Meta:
-        model = Opportunity
-        fields = ('title', 'timestamp', 'description')
+        fields = ('id',
+                  'datetime',
+                  'title',
+                  'description',
+                  # TODO organizer
+                  'location',
+                  'personnel_needed',
+                  'skills_required',
+                  'commitment_type',
+                  'background_check_requirements',
+                  # TODO image
+                  'clothing_requirements',
+                  'post_privacy',
+                  'training_requirements')
