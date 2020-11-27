@@ -19,7 +19,14 @@
             </div>
             <div class="col-4 q-pa-md">
               <q-card-section class="bg-primary text-white">
-                <div class="text-body1">Contribute to your local community through applying for volunteering opportunities near you..</div>
+                <div class="text-subtitle1">Personnel needed</div>
+                <div class="text-body2">{{ opportunity.number_of_volenteers_needed }}</div>
+                <div class="text-subtitle1">Commitment</div>
+                <div class="text-body2">{{ opportunity.commitment }}</div>
+                <div class="text-subtitle1">Estimated completion date</div>
+                <div class="text-body2">{{ opportunity.completion_date }} hours</div>
+                <div class="text-subtitle1">Location</div>
+                <div class="text-body2">{{ opportunity.location }}</div>
               </q-card-section>
             </div>
           </div>
@@ -64,7 +71,7 @@ const opportunity = {
   id: 123,
   date: '2020/12/25',
   title: 'My opportunity 1',
-  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  description: 'Description of the opportunity',
   accepting_applications: true,
   skills_required: [
     'skill1', 'skill2'
