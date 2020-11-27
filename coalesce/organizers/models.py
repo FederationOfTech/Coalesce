@@ -9,7 +9,10 @@ class Organizer(models.Model):
         on_delete=models.CASCADE,
         primary_key=True
     )
-    # TODO Opportunities
+
+    # The list of Opportunity objects that this Organizer manages is
+    # 'opportunity_set'. It's the backwards ManyToMany relation for
+    # Opportunity.organizers.
 
     def __str__(self):
         return f'Organizer {self.user}'
