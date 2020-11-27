@@ -62,7 +62,6 @@ export default {
         password: this.password
       })
         .then(response => {
-          console.log(response)
           this.$q.notify({
             type: 'positive',
             message: 'Login success!'
