@@ -5,7 +5,7 @@ class Opportunity(models.Model):
 
     background_check_requirements = models.TextField()
     commitment_type = models.TextField()
-    datetime = models.DateTimeField(help_text="Event date", blank=True)
+    datetime = models.DateTimeField(help_text="Event date")
     description = models.TextField()
     clothing_requirements = models.TextField()
     # TODO image = models.ChartField(max_length=30)  # this should be ref to a stored image url
