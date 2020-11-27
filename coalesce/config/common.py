@@ -27,6 +27,7 @@ class Common(Configuration):
         'coalesce.opportunities',
         'coalesce.organizers',
         'coalesce.volunteers',
+        'coalesce.training_details'
 
     )
 
