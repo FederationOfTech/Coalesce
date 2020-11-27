@@ -13,9 +13,9 @@
                 square
                 filled
                 clearable
-                v-model="email"
-                type="email"
-                label="email"
+                v-model="username"
+                type="username"
+                label="username"
               />
               <q-input
                 square
@@ -50,16 +50,31 @@
 export default {
   name: 'Login',
   data () {
-    console.log('asdf')
-
     return {
-      email: '',
+      username: '',
       password: ''
     }
   },
   methods: {
     auth () {
-      debugger
+      this.$store.dispatch('auth/obtainToken', {
+        username: this.username,
+        password: this.password
+      })
+        .then(response => {
+          console.log(response)
+          this.$q.notify({
+            type: 'positive',
+            message: 'Login success!'
+          })
+        })
+        .catch(error => {
+          this.$q.notify({
+            type: 'negative',
+            message: 'Login credentials incorrect'
+          })
+          console.error(error)
+        })
     }
   }
 }
