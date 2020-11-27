@@ -7,7 +7,6 @@ class OpportunityFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = 'opportunities.Opportunity'
 
-
     background_check_requirements = "test-background-check-requirements"
     commitment_type = "test-commitements"
     datetime = datetime.datetime.fromisoformat("2020-11-26T10:50:31+00:00")
