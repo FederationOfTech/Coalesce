@@ -117,8 +117,5 @@ venv.bak/
 # editors
 *.code-workspace
 *.vscode
-<<<<<<< HEAD
-.idea
-=======
 *.idea
->>>>>>> 0c38e9d (design)
+
