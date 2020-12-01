@@ -6,6 +6,7 @@ from rest_framework import status
 import factory
 from .factories import OpportunityFactory
 from ..models import Opportunity
+from ...organizers.test.factories import OrganizerFactory
 
 
 class TestOpportunitiesListTestCase(APITestCase):
@@ -53,3 +54,15 @@ class TestOpportunityDetailTestCase(APITestCase):
 
         opportunity = Opportunity.objects.get(pk=self.opportunity.id)
         eq_(opportunity.title, new_title)
+
+    def test_patch_request_updates_organizers(self):
+        # TODO implement security checks to prevent malicious clients from modifying organizers
+        organizer = OrganizerFactory()
+        payload = {'organizers': [organizer.pk]}
+        response = self.client.patch(self.url, payload)
+        eq_(response.status_code, status.HTTP_200_OK)
+
+        opportunity = Opportunity.objects.get(pk=self.opportunity.id)
+        organizers = opportunity.organizers.all()
+        eq_(organizers.count(), 1)
+        eq_(str(organizers[0].pk), organizer.pk)
