@@ -10,12 +10,12 @@ jobs:
     container: python:3.8
 
     services:
-      postgres:
+      db:
         image: postgres:latest
         env:
-          POSTGRES_DB: postgres
+          POSTGRES_DB: test
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_PASSWORD: password
         # Set health checks to wait until postgres has started
         options: >-
           --health-cmd pg_isready
@@ -37,6 +37,4 @@ jobs:
         run: ./manage.py test
         env:
           DJANGO_SECRET_KEY: local
-          POSTGRES_DB: postgres
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
+          DATABASE_URL: postgresql://postgres:password@db/test

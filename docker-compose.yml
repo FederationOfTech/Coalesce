@@ -13,9 +13,7 @@ services:
     restart: always
     environment:
       - DJANGO_SECRET_KEY=local
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - DATABASE_URL=postgresql://postgres:postgres@postgres/postgres
     image: api
     build: ./
     command: >
