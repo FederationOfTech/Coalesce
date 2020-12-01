@@ -12,6 +12,7 @@ from .opportunities.views import OpportunityViewSet
 from .users.views import UserViewSet, UserCreateViewSet
 from .organizers.views import OrganizerCreateViewSet
 from .volunteers.views import VolunteerCreateViewSet, VolunteerViewSet
+from .training_details.views import TrainingDetailsViewSet, TrainingDetailsCreateViewSet
 
 router = DefaultRouter()
 router.register(r"users", UserViewSet)
@@ -20,6 +21,8 @@ router.register(r"opportunities", OpportunityViewSet)
 router.register(r"organizers", OrganizerCreateViewSet)
 router.register(r"volunteers", VolunteerCreateViewSet)
 router.register(r"volunteers", VolunteerViewSet)
+router.register(r"training_details", TrainingDetailsViewSet)
+router.register(r"training_details", TrainingDetailsCreateViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),

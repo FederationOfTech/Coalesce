@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/FederationOfTech/coalesce.svg?branch=master)](https://travis-ci.org/FederationOfTech/coalesce)
 [![Built with](https://img.shields.io/badge/Built_with-Cookiecutter_Django_Rest-F7B633.svg)](https://github.com/agconti/cookiecutter-django-rest)
 
-An open source volunteer management platform. Check out the project's [documentation](http://FederationOfTech.github.io/coalesce/).
+An open source volunteer management platform. Check out the project's [documentation](https://FederationOfTech.github.io/Coalesce/).
 
 # Prerequisites
 
