@@ -17,6 +17,14 @@ const routes = [
   },
 
   {
+    path: '/create-organiser',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/CreateOrganiser.vue') }
+    ]
+  },
+
+  {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
