@@ -99,7 +99,7 @@ const opportunity = {
 }
 
 export default {
-  name: 'OpportunitiesSearchPage',
+  name: 'OpportunityDetailsPage',
   data () {
     return {
       opportunity: opportunity
