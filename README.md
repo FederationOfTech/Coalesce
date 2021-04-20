@@ -22,7 +22,7 @@ Some features you can expect from Coalesce are:
 
 Docker 
 - Available on [Mac](https://docs.docker.com/docker-for-mac/install/) or [Windows](https://docs.docker.com/docker-for-windows/install/) 
-- Windows client requires a specific version of [Windows](https://superuser.com/questions/1550291/how-to-install-windows-10-home-19018-update), [WSL 2 Linux kernel](https://docs.microsoft.com/en-gb/windows/wsl/wsl2-kernel) and [Git](https://git-scm.com/download/win). Once up and running Docker can be found on the right of the tool bar.  
+- Windows client requires a specific version of [Windows](https://superuser.com/questions/1550291/how-to-install-windows-10-home-19018-update), [WSL 2 Linux kernel](https://docs.microsoft.com/en-gb/windows/wsl/wsl2-kernel) and [Git](https://git-scm.com/download/win). Once up and running Docker can be found on the right of the tool bar. Run `git config core.autocrlf false` before checking out a git branch so that UNIX line-endings needed by containers are used.
 
 # Local Development
 
