@@ -6,10 +6,10 @@ from .serializers import OrganizationSerializer
 
 
 class OrganizationViewSet(mixins.RetrieveModelMixin,
-                         mixins.UpdateModelMixin,
-                         mixins.CreateModelMixin,
-                         mixins.ListModelMixin,
-                         viewsets.GenericViewSet):
+                          mixins.UpdateModelMixin,
+                          mixins.CreateModelMixin,
+                          mixins.ListModelMixin,
+                          viewsets.GenericViewSet):
     """
     Updates and retrieves opportunities.
     """
