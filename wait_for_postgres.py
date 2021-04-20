@@ -2,14 +2,20 @@ import os
 import logging
 from time import time, sleep
 import psycopg2
+import dj_database_url
+
 check_timeout = os.getenv("POSTGRES_CHECK_TIMEOUT", 30)
 check_interval = os.getenv("POSTGRES_CHECK_INTERVAL", 1)
 interval_unit = "second" if check_interval == 1 else "seconds"
+
+# Get the database connection details from DATBASE_URL
+django_db_config = dj_database_url.config()
+
 config = {
-    "dbname": os.getenv("POSTGRES_DB", "postgres"),
-    "user": os.getenv("POSTGRES_USER", "postgres"),
-    "password": os.getenv("POSTGRES_PASSWORD", "postgres"),
-    "host": os.getenv("DATABASE_URL", "postgres")
+    "dbname": django_db_config.get("NAME", "postgres"),
+    "user": django_db_config.get("USER", "postgres"),
+    "password": django_db_config.get("PASSWORD", "postgres"),
+    "host": django_db_config.get("HOST", "postgres")
 }
 
 start_time = time()
