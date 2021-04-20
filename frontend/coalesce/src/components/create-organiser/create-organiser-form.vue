@@ -5,17 +5,10 @@
             <q-input v-model="websiteUrl" label="Do you have a website?" placeholder="Enter URL here..." />
             <q-input v-model="organisationDescription" label="Description of organisation" placeholder="Brief description of your organisation..." />
             <div class="organisation-type">
-                <div class="q-gutter-sm">
-                    <q-checkbox v-model="teal" label="Teal" color="teal" />
-                    <q-checkbox v-model="orange" label="Orange" color="orange" />
-                    <q-checkbox v-model="red" label="Red" color="red" />
-                    <q-checkbox v-model="cyan" label="Cyan" color="cyan" />
+                <p>What form of organisation do you represent?</p>
+                <div class="q-gutter-sm column">
+                    <q-radio v-for="({label, value}) in organisationTypes" :key="label" v-model="form" :val="value" :label="label" />
                 </div>
-                <q-input v-model="organisationName" label="Description of your organisation" />
-                <q-input v-model="organisationName" label="Description of your organisation" />
-                <q-input v-model="organisationName" label="Description of your organisation" />
-                <q-input v-model="organisationName" label="Description of your organisation" />
-                <q-input v-model="organisationName" label="Description of your organisation" />
             </div>
             <div class="user-password">
                 <q-input v-model="username" label="Username" placeholder="Your Username..." />
@@ -27,6 +20,7 @@
 </template>
 
 <script>
+import { organisationTypes } from './utils/form-data'
 export default {
   name: 'CreateOrganiserForm',
   data () {
@@ -36,7 +30,9 @@ export default {
       organisationDescription: '',
       username: '',
       password: '',
-      email: ''
+      email: '',
+      organisationTypes
+
     }
   },
   computed: {
@@ -54,7 +50,7 @@ export default {
     display: grid;
     grid-template-columns: 2fr 1fr;
     grid-template-rows: repeat(4, 1fr);
-    grid-column-gap: 8px;
+    grid-column-gap: 16px;
     grid-row-gap: 16px;
     padding: 16px;
 
@@ -75,6 +71,9 @@ export default {
 }
 
 .organisation-type {
+    border: 1px solid grey;
+    border-radius: 8px;
     grid-area: 2 / 2 / 5 / 3;
+    padding: 16px;
 }
 </style>
