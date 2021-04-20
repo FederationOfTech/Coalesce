@@ -11,6 +11,7 @@ from rest_framework_simplejwt.views import (
 from .opportunities.views import OpportunityViewSet
 from .users.views import UserViewSet, UserCreateViewSet
 from .organizers.views import OrganizerCreateViewSet
+from .organizations.views import OrganizationViewSet
 from .volunteers.views import VolunteerCreateViewSet, VolunteerViewSet
 from .training_details.views import TrainingDetailsViewSet, TrainingDetailsCreateViewSet
 
@@ -19,6 +20,7 @@ router.register(r"users", UserViewSet)
 router.register(r"users", UserCreateViewSet)
 router.register(r"opportunities", OpportunityViewSet)
 router.register(r"organizers", OrganizerCreateViewSet)
+router.register(r"organizations", OrganizationViewSet)
 router.register(r"volunteers", VolunteerCreateViewSet)
 router.register(r"volunteers", VolunteerViewSet)
 router.register(r"training_details", TrainingDetailsViewSet)

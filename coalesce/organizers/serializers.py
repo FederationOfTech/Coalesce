@@ -9,5 +9,5 @@ class CreateOrganizerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Organizer
-        fields = ('user',)
+        fields = ('user', 'organization')
         read_only_fields = ('user',)

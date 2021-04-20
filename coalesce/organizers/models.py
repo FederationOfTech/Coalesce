@@ -10,6 +10,8 @@ class Organizer(models.Model):
         primary_key=True
     )
 
+    organization = models.ForeignKey('organizations.Organization', on_delete=models.CASCADE, null=True)
+
     # The list of Opportunity objects that this Organizer manages is
     # 'opportunity_set'. It's the backwards ManyToMany relation for
     # Opportunity.organizers.
