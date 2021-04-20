@@ -1,7 +1,7 @@
 <template>
   <q-page>
-    <div class="row">
-      <div class="col-3">
+    <div class="row q-pt-xl">
+      <div class="col-3 q-pa-lg">
         <q-card class="my-card">
           <img src="https://cdn.quasar.dev/img/mountains.jpg">
           <q-card-section>
@@ -19,10 +19,9 @@
 
         </q-card>
       </div>
-      <div class="col-9">
-        <div class="text-h5 q-pt-lg">{{ volunteer.name }}</div>
-        <div class="text-h5 q-pt-lg">{{ volunteer.organization }}</div>
-        <div class="text-h5 q-pt-lg">{{ volunteer.organizer_comments }}</div>
+      <div class="col-9 q-pa-lg">
+        <div class="text-h3 q-pt-xl">{{ volunteer.name }}</div>
+        <div class="text-h6">Organiser - Federation of Tech</div>
 
         <div class="text-h5 q-pt-lg">Upcoming Tasks</div>
         <!-- list all opportunities -->
