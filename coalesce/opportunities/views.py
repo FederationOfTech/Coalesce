@@ -1,5 +1,6 @@
 from rest_framework import viewsets, mixins
 from rest_framework.permissions import BasePermission, SAFE_METHODS
+from rest_framework import filters
 
 from .models import Opportunity
 from .serializers import OpportunitySerializer
@@ -37,4 +38,6 @@ class OpportunityViewSet(mixins.RetrieveModelMixin,
     """
     queryset = Opportunity.objects.all()
     serializer_class = OpportunitySerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ["@title", "@description"]
     permission_classes = (OpportunityOwnerPermission,)
