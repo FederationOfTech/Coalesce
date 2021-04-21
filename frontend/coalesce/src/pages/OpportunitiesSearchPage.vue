@@ -70,61 +70,60 @@
 </template>
 
 <script>
-const opportunities = [
-  {
-    id: 123,
-    date: '2020/12/25',
-    title: 'My opportunity 1',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-  },
-  {
-    id: 234,
-    date: '2020/11/30',
-    title: 'Opportunity 2',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-  },
-  {
-    id: 345,
-    date: '2020/12/04',
-    title: 'Opportunity 23',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-  },
-  {
-    id: 456,
-    date: '2021/01/14',
-    title: 'Opportunity 4',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-  }
-]
-
 export default {
   name: 'OpportunitiesSearchPage',
   data () {
     return {
-      opportunities: opportunities,
+      loading: true,
+      opportunities: {},
       filter: '',
       filterDate: ''
     }
   },
-  computed: {
+  created () {
+    this.$axios.get('/api/v1/opportunities/',
+      {
+        headers: {
+          Authorization: 'Bearer ' + this.$store.state.auth.jwt.access
+        }
+      })
+      .then(response => {
+        this.loading = false
+        this.opportunities = response.data
+      })
+      .catch(e => {
+        console.log(e)
+      })
+  },
+  methods: {
+    clearDateFilter () {
+      this.filterDate = ''
+    },
     filterOpportunity: function () {
       if (!this.filter && !this.filterDate) {
         return this.opportunities
       }
 
-      let results = this.opportunities.filter(o => {
-        return o.title.toLowerCase().indexOf(this.filter.toLowerCase()) > -1
-      })
+      let results = {}
+
+      this.$axios.get('/api/v1/opportunities/?search=' + this.filter.toLowerCase(),
+        {
+          headers: {
+            Authorization: 'Bearer ' + this.$store.state.auth.jwt.access
+          }
+        })
+        .then(response => {
+          this.loading = false
+          results = response.data
+        })
+        .catch(e => {
+          console.log(e)
+        })
 
       results = results.filter(o => {
         return o.date.toLowerCase().indexOf(this.filterDate.toLowerCase()) > -1
       })
       return results
-    }
-  },
-  methods: {
-    clearDateFilter () {
-      this.filterDate = ''
     }
   }
 }
