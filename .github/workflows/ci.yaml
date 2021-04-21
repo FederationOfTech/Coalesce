@@ -1,0 +1,98 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2
+    - uses: github/super-linter@v3
+      env:
+        VALIDATE_ALL_CODEBASE: false
+        DEFAULT_BRANCH: master
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  build:
+    name: Build
+    needs: lint
+    runs-on: ubuntu-20.04
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+    - name: Setup Docker builder
+      uses: docker/setup-buildx-action@v1
+    - name: Enable Docker build layer cache
+      uses: actions/cache@v2
+      with:
+        path: /tmp/buildx-cache
+        key: buildx-${{ github.sha }}
+        restore-keys: |
+          buildx-${{ github.sha }}
+    - run: mkdir -p /tmp/buildx-cache/api /tmp/buildx-cache/frontend
+    - name: Build api image
+      uses: docker/build-push-action@v2
+      with:
+        tags: api:latest
+        push: false
+        context: ./
+        file: ./Dockerfile
+        cache-from: type=local,src=/tmp/buildx-cache/api
+        cache-to: type=local,dest=/tmp/buildx-cache/api,mode=max
+    - name: Build frontend image
+      uses: docker/build-push-action@v2
+      with:
+        tags: frontend:latest
+        push: false
+        context: ./frontend/coalesce/
+        file: ./frontend/coalesce/Dockerfile
+        cache-from: type=local,src=/tmp/buildx-cache/frontend
+        cache-to: type=local,dest=/tmp/buildx-cache/frontend,mode=max
+  test:
+    name: Test
+    runs-on: ubuntu-20.04
+    needs: build
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+    - name: Setup Docker builder
+      uses: docker/setup-buildx-action@v1
+    - name: Enable Docker build layer cache
+      uses: actions/cache@v2
+      with:
+        path: /tmp/buildx-cache
+        key: buildx-${{ github.sha }}
+        restore-keys: |
+          buildx-${{ github.sha }}
+    # image build steps are repeated here, but as cache is used
+    # these should take no extra time to run
+    # there's no other way to share data between jobs in
+    # a GitHub Action; having one Build&Test job could be
+    # an option, but some structure is never a bad idea
+    # NB: `load: true` is used here to enable testing
+    # these images with `docker-compose`
+    - run: mkdir -p /tmp/buildx-cache/api /tmp/buildx-cache/frontend
+    - name: Build api image
+      uses: docker/build-push-action@v2
+      with:
+        tags: api:latest
+        push: false
+        load: true
+        context: ./
+        file: ./Dockerfile
+        cache-from: type=local,src=/tmp/buildx-cache/api
+        cache-to: type=local,dest=/tmp/buildx-cache/api,mode=max
+    - name: Build frontend image
+      uses: docker/build-push-action@v2
+      with:
+        tags: frontend:latest
+        push: false
+        load: true
+        context: ./frontend/coalesce/
+        file: ./frontend/coalesce/Dockerfile
+        cache-from: type=local,src=/tmp/buildx-cache/frontend
+        cache-to: type=local,dest=/tmp/buildx-cache/frontend,mode=max
+    - run: |
+        docker-compose build documentation
+        docker-compose up --detach --no-build
+        docker-compose run --rm api bash -c "flake8 . && python wait_for_postgres.py && ./manage.py test"
