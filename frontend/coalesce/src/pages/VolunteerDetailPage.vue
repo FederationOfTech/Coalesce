@@ -40,7 +40,7 @@
                     </div>
 
                     <div class="justify-end q-pa-md">
-                      <div class="text-subtitle2 q-pt-lg">{{ o.date }}</div>
+                      <div class="text-subtitle2 q-pt-lg">{{ o.datetime }}</div>
                       <q-icon class="centre-icon large-icon" name="remove_red_eye" color="grey" />
                     </div>
                   </div>
@@ -56,26 +56,6 @@
 
 <script>
 
-const opportunities = [
-  {
-    id: 1,
-    title: 'Opportunity Title',
-    date: '2020/09/30',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-  },
-  {
-    id: 2,
-    title: 'Opportunity Title',
-    date: '2020/10/15',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-  },
-  {
-    id: 3,
-    title: 'Opportunity Title',
-    date: '2020/11/30',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-  }
-]
 
 export default {
   name: 'VolunteerDetailPage',
@@ -83,7 +63,7 @@ export default {
     return {
       volunteer: {},
       user: {},
-      opportunities: opportunities
+      opportunities: []
     }
   },
   created () {
@@ -104,6 +84,20 @@ export default {
           })
           .then(response => {
             this.user = response.data
+          })
+          .catch(e => {
+            console.log(e)
+          })
+
+        this.$axios.get('/api/v1/opportunities/',
+          {
+            headers: {
+              Authorization: 'Bearer ' + this.$store.state.auth.jwt.access
+            }
+          })
+          .then(response => {
+            console.log(response)
+            this.opportunities = response.data.results
           })
           .catch(e => {
             console.log(e)
