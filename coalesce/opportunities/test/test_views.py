@@ -41,6 +41,7 @@ class TestOpportunitiesListTestCase(APITestCase):
         eq_(opportunity.description, self.opportunity_data.get('description'))
 
     def test_post_request_with_query_params_returns_subset(self):
+        self.client.credentials(HTTP_AUTHORIZATION=f'Token {self.user.auth_token}')
         response = self.client.post(self.url, self.opportunity_data)
         eq_(response.status_code, status.HTTP_201_CREATED)
 
