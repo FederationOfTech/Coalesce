@@ -27,13 +27,13 @@
               <q-card-section class="bg-primary text-white">
                 <div class="text-subtitle1 text-weight-bold
 ">Personnel needed</div>
-                <div class="text-body2">{{ opportunity.number_of_volenteers_needed }}</div>
+                <div class="text-body2">{{ opportunity.personnel_needed }}</div>
                 <div class="text-subtitle1 text-weight-bold
 ">Commitment</div>
-                <div class="text-body2">{{ opportunity.commitment }} hours</div>
+                <div class="text-body2">{{ opportunity.commitment_type }}</div>
                 <div class="text-subtitle1 text-weight-bold
-">Estimated completion date</div>
-                <div class="text-body2">{{ opportunity.completion_date }}</div>
+">Date</div>
+                <div class="text-body2">{{ new Date(opportunity.datetime).toLocaleString() }}</div>
                 <div class="text-subtitle1 text-weight-bold
 ">Location</div>
                 <div class="text-body2">{{ opportunity.location }}</div>
@@ -76,34 +76,41 @@
       </div>
     </div>
 
+    <q-inner-loading :showing="loading">
+      <q-spinner-gears size="50px" color="primary" />
+    </q-inner-loading>
   </q-page>
 </template>
 
 <script>
-const opportunity = {
-  id: 123,
-  date: '2020/12/25',
-  title: 'My opportunity 1',
-  description: 'Description of the opportunity',
-  accepting_applications: true,
-  preparing_onboarding: false,
-  skills_required: [
-    'skill1', 'skill2'
-  ],
-  organiser_photo: '',
-  number_of_volenteers_needed: 4,
-  commitment: 20,
-  completion_date: '2020/01/14',
-  location: 'virtual',
-  completed: false
-}
+// TODO The following fields are not yet available from the REST API:
+// - accepting_applications (bool)
+// - preparing_onboarding (bool)
+// - completed (bool)
 
 export default {
   name: 'OpportunityDetailsPage',
   data () {
     return {
-      opportunity: opportunity
+      loading: true,
+      opportunity: {}
     }
+  },
+
+  created () {
+    this.$axios.get('/api/v1/opportunities/' + this.$route.params.id + '/',
+      {
+        headers: {
+          Authorization: 'Bearer ' + this.$store.state.auth.jwt.access
+        }
+      })
+      .then(response => {
+        this.loading = false
+        this.opportunity = response.data
+      })
+      .catch(e => {
+        console.log(e)
+      })
   }
 }
 </script>
