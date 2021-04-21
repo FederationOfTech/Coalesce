@@ -17,6 +17,14 @@ const routes = [
   },
 
   {
+    path: '/volunteer/:id',
+    component: () => import('layouts/BasicLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/VolunteerDetailPage.vue') }
+    ]
+  },
+
+  {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
