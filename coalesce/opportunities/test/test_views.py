@@ -32,6 +32,26 @@ class TestOpportunitiesListTestCase(APITestCase):
         eq_(opportunity.title, self.opportunity_data.get('title'))
         eq_(opportunity.description, self.opportunity_data.get('description'))
 
+    def test_post_request_with_query_params_returns_subset(self):
+        response = self.client.post(self.url, self.opportunity_data)
+        eq_(response.status_code, status.HTTP_201_CREATED)
+
+        opportunity = Opportunity.objects.get(pk=response.data.get('id'))
+        eq_(opportunity.title, self.opportunity_data.get('title'))
+        eq_(opportunity.description, self.opportunity_data.get('description'))
+
+        search_url = self.url + "?search=test"
+        response = self.client.get(search_url)
+
+        eq_(1, len(response.data["results"]))
+        opportunity = Opportunity.objects.get(pk=response.data["results"][0].get("id"))
+        eq_(opportunity.title, self.opportunity_data.get('title'))
+        eq_(opportunity.description, self.opportunity_data.get('description'))
+
+        search_url = self.url + "?search=foo-no-results"
+        response = self.client.get(search_url)
+        eq_(0, len(response.data["results"]))
+
 
 class TestOpportunityDetailTestCase(APITestCase):
     """
