@@ -1,5 +1,5 @@
 export function updateToken (state, newToken) {
-  localStorage.setItem('t', newToken)
+  localStorage.setItem('t', JSON.stringify(newToken))
   state.jwt = newToken
 }
 

@@ -15,6 +15,7 @@ class Common(Configuration):
         'django.contrib.sessions',
         'django.contrib.messages',
         'django.contrib.staticfiles',
+        'django.contrib.postgres',
 
 
         # Third party apps
@@ -26,6 +27,7 @@ class Common(Configuration):
         'coalesce.users',
         'coalesce.opportunities',
         'coalesce.organizers',
+        'coalesce.organizations',
         'coalesce.volunteers',
         'coalesce.training_details'
 

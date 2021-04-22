@@ -1,34 +1,14 @@
 
 const routes = [
   {
-    path: '/opportunities',
-    component: () => import('layouts/BasicLayout.vue'),
-    children: [
-      { path: '', component: () => import('pages/OpportunitiesSearchPage.vue') }
-    ]
-  },
-
-  {
-    path: '/opportunity/:id',
-    component: () => import('layouts/BasicLayout.vue'),
-    children: [
-      { path: '', component: () => import('pages/OpportunityDetailsPage.vue') }
-    ]
-  },
-
-  {
-    path: '/create-organiser',
-    component: () => import('layouts/MainLayout.vue'),
-    children: [
-      { path: '', component: () => import('pages/CreateOrganiser.vue') }
-    ]
-  },
-
-  {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: 'login', component: () => import('pages/LogIn.vue') }
+      { path: 'login', component: () => import('pages/LogIn.vue') },
+      { path: 'opportunities', component: () => import('pages/OpportunitiesSearchPage.vue') },
+      { path: 'opportunity/:id', component: () => import('pages/OpportunityDetailsPage.vue') },
+      { path: 'volunteer/:id', component: () => import('pages/VolunteerDetailPage.vue') },
+      { path: '/create-organiser', component: () => import('pages/CreateOrganiser.vue') }
     ]
   },
 
