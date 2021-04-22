@@ -2,8 +2,8 @@
   <q-page>
     <div class="row q-pt-lg">
       <div class="col-8 q-pa-md">
-        <h1>My Dashboard</h1>
-        <p>Magni nulla doloremque cupiditate ratione placeat hic tenetur praesentium. Quidem harum dolores odit quae explicabo. Quo nihil dignissimos aut quasi. Qui dolorem eius nemo. Et ut eum aliquam fuga.</p>
+        <h2 class="text-weight-bolder">My Dashboard</h2>
+        <div class="text-body-1">Magni nulla doloremque cupiditate ratione placeat hic tenetur praesentium. Quidem harum dolores odit quae explicabo. Quo nihil dignissimos aut quasi. Qui dolorem eius nemo. Et ut eum aliquam fuga.</div>
 
         <div class="row">
           <q-input
@@ -27,7 +27,7 @@
 
         <!-- search results list -->
         <div class="col-md-6 q-pa-md">
-          <div class="text-h2">Opportunities</div>
+          <div class="text-weight-bolder text-h2">Opportunities</div>
         </div>
         <div class="row" >
           <div class="col-md-6 q-pa-md" v-for="o in opportunities" v-bind:key="o.id">
