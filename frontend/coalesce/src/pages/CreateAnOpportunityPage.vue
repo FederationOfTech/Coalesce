@@ -131,7 +131,7 @@
 const skills_required = [
   { label: 'Hospitality', value: 'hospitality' },
   { label: 'Information Technology', value: 'it' },
-  { label: 'Building & Construction', value: 'building&construction' },
+  { label: 'Building & Construction', value: 'buildingconstruction' },
   { label: 'Arts & Communication', value: 'arts&communication' },
   { label: 'Science & Engineering', value: 'science&engineering' }
 ]
