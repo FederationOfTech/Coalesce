@@ -1,34 +1,13 @@
 
 const routes = [
   {
-    path: '/opportunities',
-    component: () => import('layouts/BasicLayout.vue'),
-    children: [
-      { path: '', component: () => import('pages/OpportunitiesSearchPage.vue') }
-    ]
-  },
-
-  {
-    path: '/opportunity/:id',
-    component: () => import('layouts/BasicLayout.vue'),
-    children: [
-      { path: '', component: () => import('pages/OpportunityDetailsPage.vue') }
-    ]
-  },
-
-  {
-    path: '/volunteer/:id',
-    component: () => import('layouts/BasicLayout.vue'),
-    children: [
-      { path: '', component: () => import('pages/VolunteerDetailPage.vue') }
-    ]
-  },
-
-  {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: 'login', component: () => import('pages/LogIn.vue') }
+      { path: 'login', component: () => import('pages/LogIn.vue') },
+      { path: 'opportunities', component: () => import('pages/OpportunitiesSearchPage.vue') },
+      { path: 'opportunity/:id', component: () => import('pages/OpportunityDetailsPage.vue') },
+      { path: 'volunteer/:id', component: () => import('pages/VolunteerDetailPage.vue') }
     ]
   },
 
