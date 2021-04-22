@@ -10,7 +10,7 @@
           </q-card-section>
           <!-- search bar -->
           <q-toolbar>
-            <q-input rounded outlined class="search-bar" v-model="filter" type="text" >
+           <q-input rounded outlined class="search-bar" v-on:input="filterOpportunities" v-model="filter" type="text" >
               <template v-slot:append>
                 <q-icon name="search" />
               </template>
@@ -20,7 +20,7 @@
 
         <!-- list all opportunities -->
         <div class="row" >
-          <div class="col-md-6 q-pa-md" v-for="o in filterOpportunity" v-bind:key="o.id">
+          <div  class="col-md-6 q-pa-md" v-for="o in opportunities" v-bind:key="o.id">
             <q-card class="opportunity-card card">
               <q-card-section class="bg-primary text-white">
                 <div class="text-h6">{{ o.title }}</div>
@@ -75,7 +75,7 @@ export default {
   data () {
     return {
       loading: true,
-      opportunities: {},
+      opportunities: [],
       filter: '',
       filterDate: ''
     }
@@ -89,7 +89,7 @@ export default {
       })
       .then(response => {
         this.loading = false
-        this.opportunities = response.data
+        this.opportunities = response.data.results
       })
       .catch(e => {
         console.log(e)
@@ -99,12 +99,12 @@ export default {
     clearDateFilter () {
       this.filterDate = ''
     },
-    filterOpportunity: function () {
+    async filterOpportunities () {
       if (!this.filter && !this.filterDate) {
         return this.opportunities
       }
 
-      let results = {}
+      let results = []
 
       this.$axios.get('/api/v1/opportunities/?search=' + this.filter.toLowerCase(),
         {
@@ -114,7 +114,7 @@ export default {
         })
         .then(response => {
           this.loading = false
-          results = response.data
+          this.opportunities = response.data.results
         })
         .catch(e => {
           console.log(e)
@@ -123,6 +123,7 @@ export default {
       results = results.filter(o => {
         return o.date.toLowerCase().indexOf(this.filterDate.toLowerCase()) > -1
       })
+
       return results
     }
   }
