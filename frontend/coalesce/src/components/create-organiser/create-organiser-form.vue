@@ -75,8 +75,8 @@ export default {
 
   methods: {
     isFormValid () {
-        this.$v.$touch();
-        return !this.$v.$invalid;
+      this.$v.$touch()
+      return !this.$v.$invalid
     },
 
     onFormSubmit () {
@@ -88,7 +88,7 @@ export default {
     },
 
     createOrganiser () {
-        // POST to endpoint
+      // POST to endpoint
     }
   }
 }
