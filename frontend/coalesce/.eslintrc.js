@@ -11,7 +11,8 @@ module.exports = {
   },
 
   env: {
-    browser: true
+    browser: true,
+    "jest/globals": true
   },
 
   // Rules order is important, please avoid shuffling them
@@ -27,7 +28,8 @@ module.exports = {
     // 'plugin:vue/strongly-recommended', // Priority B: Strongly Recommended (Improving Readability)
     // 'plugin:vue/recommended', // Priority C: Recommended (Minimizing Arbitrary Choices and Cognitive Overhead)
 
-    'standard'
+    'standard',
+    'plugin:jest/recommended'
 
   ],
 
