@@ -1,5 +1,5 @@
 <template>
-    <q-form class="form">
+    <q-form class="form" method="post" @submit.prevent="createOrganiser">
         <div class="grid-container">
             <div class="form-group">
                 <q-input v-model="organisationName" label="Organisation name" placeholder="Your Organisation name..." />
@@ -74,17 +74,21 @@ export default {
   },
 
   methods: {
-    createOrganiser () {
-      this.$v.$touch()
-      if (this.$v.$invalid) {
-        this.submitStatus = 'ERROR'
+    isFormValid () {
+        this.$v.$touch();
+        return !this.$v.$invalid;
+    },
+
+    onFormSubmit () {
+      if (this.isFormValid()) {
+        this.createOrganiser()
       } else {
-        // do your submit logic here
-        this.submitStatus = 'PENDING'
-        setTimeout(() => {
-          this.submitStatus = 'OK'
-        }, 500)
+        // An error happened
       }
+    },
+
+    createOrganiser () {
+        // POST to endpoint
     }
   }
 }
