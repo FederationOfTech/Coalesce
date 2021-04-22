@@ -10,7 +10,7 @@
           </q-card-section>
           <!-- search bar -->
           <q-toolbar>
-            <q-input rounded outlined class="search-bar" v-model="filter" type="text" >
+           <q-input rounded outlined class="search-bar" v-on:input="filterOpportunities" v-model="filter" type="text" >
               <template v-slot:append>
                 <q-icon name="search" />
               </template>
@@ -20,7 +20,7 @@
 
         <!-- list all opportunities -->
         <div class="row" >
-          <div class="col-md-6 q-pa-md" v-for="o in filterOpportunity" v-bind:key="o.id">
+          <div  class="col-md-6 q-pa-md" v-for="o in opportunities" v-bind:key="o.id">
             <q-card class="opportunity-card card">
               <q-card-section class="bg-primary text-white">
                 <div class="text-h6">{{ o.title }}</div>
@@ -70,61 +70,61 @@
 </template>
 
 <script>
-const opportunities = [
-  {
-    id: 123,
-    date: '2020/12/25',
-    title: 'My opportunity 1',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-  },
-  {
-    id: 234,
-    date: '2020/11/30',
-    title: 'Opportunity 2',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-  },
-  {
-    id: 345,
-    date: '2020/12/04',
-    title: 'Opportunity 23',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-  },
-  {
-    id: 456,
-    date: '2021/01/14',
-    title: 'Opportunity 4',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-  }
-]
-
 export default {
   name: 'OpportunitiesSearchPage',
   data () {
     return {
-      opportunities: opportunities,
+      loading: true,
+      opportunities: [],
       filter: '',
       filterDate: ''
     }
   },
-  computed: {
-    filterOpportunity: function () {
-      if (!this.filter && !this.filterDate) {
-        return this.opportunities
-      }
-
-      let results = this.opportunities.filter(o => {
-        return o.title.toLowerCase().indexOf(this.filter.toLowerCase()) > -1
+  created () {
+    this.$axios.get('/api/v1/opportunities/',
+      {
+        headers: {
+          Authorization: 'Bearer ' + this.$store.state.auth.jwt.access
+        }
       })
-
-      results = results.filter(o => {
-        return o.date.toLowerCase().indexOf(this.filterDate.toLowerCase()) > -1
+      .then(response => {
+        this.loading = false
+        this.opportunities = response.data.results
       })
-      return results
-    }
+      .catch(e => {
+        console.log(e)
+      })
   },
   methods: {
     clearDateFilter () {
       this.filterDate = ''
+    },
+    async filterOpportunities () {
+      if (!this.filter && !this.filterDate) {
+        return this.opportunities
+      }
+
+      let results = []
+
+      this.$axios.get('/api/v1/opportunities/?search=' + this.filter.toLowerCase(),
+        {
+          headers: {
+            Authorization: 'Bearer ' + this.$store.state.auth.jwt.access
+          }
+        })
+        .then(response => {
+          this.loading = false
+          this.opportunities = response.data.results
+        })
+        .catch(e => {
+          console.log(e)
+        })
+
+      results = results.filter(o => {
+        return o.date.toLowerCase().indexOf(this.filterDate.toLowerCase()) > -1
+      })
+
+      return results
     }
   }
 }
