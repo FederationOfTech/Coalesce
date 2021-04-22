@@ -4,12 +4,12 @@ const routes = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
+      { path: 'create-organiser', component: () => import('pages/CreateOrganiser.vue') },
       { path: 'login', component: () => import('pages/LogIn.vue') },
       { path: 'opportunities', component: () => import('pages/OpportunitiesSearchPage.vue') },
       { path: 'opportunity/:id', component: () => import('pages/OpportunityDetailsPage.vue') },
       { path: 'organizer', component: () => import('pages/OrganizerDashboardPage.vue') },
       { path: 'volunteer/:id', component: () => import('pages/VolunteerDetailPage.vue') },
-      { path: '/create-organiser', component: () => import('pages/CreateOrganiser.vue') },
       { path: '', component: () => import('pages/Index.vue') }
     ]
   },
