@@ -9,7 +9,8 @@ class Volunteer(models.Model):
         primary_key=True
     )
     description = models.TextField()
-    opportunities = [1]
+    # TODO List of Opportunities they have indicated interest in
+    
     skills = models.TextField(help_text='List of skills the volunteer has')  # TODO is this just a string?
     organization = models.TextField(help_text='The volunteer\'s employer or organization')
     # TODO Background check date and document
