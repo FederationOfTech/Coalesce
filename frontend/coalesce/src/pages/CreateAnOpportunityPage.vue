@@ -1,7 +1,14 @@
 <template>
-  <q-page class="q-px-xl">
-    <div class="text-overline q-py-md">OPPORTUNITY DETAILS</div>
-    <q-card>
+  <q-page class="q-px-xl q-mx-xl">
+    <div class="text-h2 text-weight-bold q-pt-xl">Create an Opportunity</div>
+    <div class="text-body1 q-py-lg">A little bit of info about creating a volunteering opportunity</div>
+
+    <div class="q-pb-lg">
+      <q-btn color="secondary" label="Submit Opportunity" />
+    </div>
+
+    <div class="text-overline">OPPORTUNITY DETAILS</div>
+    <q-card class="my-card">
       <q-card-section>
         <q-input v-model="text" label="Opportunity Title" stack-label :dense="dense" />
         <q-input v-model="text" label="Description" stack-label :dense="dense" />
@@ -100,20 +107,20 @@
     <q-card>
       <div class="row">
         <div class="col-5 q-pa-md">
-        <q-input v-model="text" label="Start Date" stack-label :dense="dense" />
-        <q-input v-model="text" label="End Date" stack-label :dense="dense" />
+          <q-input v-model="text" label="Start Date" stack-label :dense="dense" />
+          <q-input v-model="text" label="End Date" stack-label :dense="dense" />
         </div>
         <div class="col-7 q-pa-md">
-        <q-card-section>
-          <div class="row">
-            <div class="q-pa-md">
-              <q-date v-model="model" mask="MM-DD-YYYY" />
+          <q-card-section>
+            <div class="row">
+              <div class="q-pa-md">
+                <q-date v-model="model" mask="MM-DD-YYYY" />
+              </div>
+              <div class="q-pa-md">
+                <q-date v-model="model2" mask="MM-DD-YYYY" />
+              </div>
             </div>
-            <div class="q-pa-md">
-              <q-date v-model="model2" mask="MM-DD-YYYY" />
-            </div>
-          </div>
-        </q-card-section>
+          </q-card-section>
         </div>
       </div>
     </q-card>
