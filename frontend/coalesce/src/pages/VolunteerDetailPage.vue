@@ -12,15 +12,15 @@
               <div class="text-body2">{{ volunteer.description }}</div>
             </q-card-section>
             <q-card-section style="display: flow-root">
-              <div v-for="s in volunteer.skills" v-bind:key="s">
-                <q-chip size="md" style="float:right;">{{ s }}</q-chip>
-              </div>
+<!--              <div v-for="s in volunteer.skills" v-bind:key="s">-->
+<!--                <q-chip size="md" style="float:right;">{{ s }}</q-chip>-->
+<!--              </div>-->
             </q-card-section>
           </q-card>
         </div>
         <div class="col-9 q-pa-lg">
-          <div class="text-h3 text-weight-bold q-pt-xl text-white">{{ volunteer.name }}</div>
-          <div class="text-h6 text-white">Organiser - Federation of Tech</div>
+          <div class="text-h3 text-weight-bold q-pt-xl text-white">{{ user.first_name }} {{ user.last_name }}</div>
+          <div class="text-h6 text-white">Organiser - {{ volunteer.organization }}</div>
 
           <div class="text-h5 text-weight-bold q-pt-xl q-pb-lg">Upcoming Tasks</div>
           <!-- list all opportunities -->
@@ -40,7 +40,7 @@
                     </div>
 
                     <div class="justify-end q-pa-md">
-                      <div class="text-subtitle2 q-pt-lg">{{ o.date }}</div>
+                      <div class="text-subtitle2 q-pt-lg">{{ o.datetime }}</div>
                       <q-icon class="centre-icon large-icon" name="remove_red_eye" color="grey" />
                     </div>
                   </div>
@@ -55,45 +55,56 @@
 </template>
 
 <script>
-const volunteer = {
-  id: 123,
-  name: 'Mike Nolan',
-  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-  skills: [
-    'skill1', 'skill2'
-  ],
-  organization: 'The volunteers employer or organization',
-  organizer_comments: 'Notes from organizers about this volunteer'
-}
-
-const opportunities = [
-  {
-    id: 1,
-    title: 'Opportunity Title',
-    date: '2020/09/30',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-  },
-  {
-    id: 2,
-    title: 'Opportunity Title',
-    date: '2020/10/15',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-  },
-  {
-    id: 3,
-    title: 'Opportunity Title',
-    date: '2020/11/30',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-  }
-]
 
 export default {
   name: 'VolunteerDetailPage',
   data () {
     return {
-      volunteer: volunteer,
-      opportunities: opportunities
+      volunteer: {},
+      user: {},
+      opportunities: []
     }
+  },
+  created () {
+    this.$axios.get('/api/v1/volunteers/' + this.$route.params.id + '/',
+      {
+        headers: {
+          Authorization: 'Bearer ' + this.$store.state.auth.jwt.access
+        }
+      })
+      .then(response => {
+        this.volunteer = response.data
+
+        this.$axios.get('/api/v1/users/' + this.$route.params.id + '/',
+          {
+            headers: {
+              Authorization: 'Bearer ' + this.$store.state.auth.jwt.access
+            }
+          })
+          .then(response => {
+            this.user = response.data
+          })
+          .catch(e => {
+            console.log(e)
+          })
+
+        this.$axios.get('/api/v1/opportunities/',
+          {
+            headers: {
+              Authorization: 'Bearer ' + this.$store.state.auth.jwt.access
+            }
+          })
+          .then(response => {
+            console.log(response)
+            this.opportunities = response.data.results
+          })
+          .catch(e => {
+            console.log(e)
+          })
+      })
+      .catch(e => {
+        console.log(e)
+      })
   }
 }
 </script>
