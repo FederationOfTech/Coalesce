@@ -10,9 +10,9 @@
     <div class="text-overline">OPPORTUNITY DETAILS</div>
     <q-card class="my-card">
       <q-card-section>
-        <q-input v-model="text" label="Opportunity Title" stack-label :dense="dense" />
-        <q-input v-model="text" label="Description" stack-label :dense="dense" />
-        <q-input v-model="text" label="Location" stack-label :dense="dense" />
+        <q-input v-model="opportunity_title" label="Opportunity Title" stack-label />
+        <q-input v-model="opportunity_description" label="Description" stack-label />
+        <q-input v-model="opportunity_location" label="Location" stack-label />
         <div class="q-py-md">
           <q-select
             label="Personnel Needed"
@@ -39,7 +39,7 @@
                 </q-scroll-area>
               </q-card-section>
               <q-card-section class="bg-primary text-white">
-                <q-input v-model="text" label="Other, please enter below" stack-label :dense="dense" />
+                <q-input v-model="skills_required_other" label="Other, please enter below" stack-label />
               </q-card-section>
             </q-card>
           </div>
@@ -57,7 +57,7 @@
                 </q-scroll-area>
               </q-card-section>
               <q-card-section class="bg-primary text-white">
-                <q-input v-model="text" label="Other, please enter below" stack-label :dense="dense" />
+                <q-input v-model="background_check_requirements_other" label="Other, please enter below" stack-label />
               </q-card-section>
             </q-card>
           </div>
@@ -77,7 +77,7 @@
                 </q-scroll-area>
               </q-card-section>
               <q-card-section class="bg-primary text-white">
-                <q-input v-model="text" label="Other, please enter below" stack-label :dense="dense" />
+                <q-input v-model="clothing_requirements_other" label="Other, please enter below" stack-label />
               </q-card-section>
             </q-card>
           </div>
@@ -95,7 +95,7 @@
                 </q-scroll-area>
               </q-card-section>
               <q-card-section class="bg-primary text-white">
-                <q-input v-model="text" label="Other, please enter below" stack-label :dense="dense" />
+                <q-input v-model="commitment_type_other" label="Other, please enter below" stack-label />
               </q-card-section>
             </q-card>
           </div>
@@ -103,12 +103,12 @@
       </q-card-section>
     </q-card>
 
-    <div class="text-overline q-py-md">OPPORTUNITY DATE & TIME</div>
+    <div class="text-overline q-py-md">OPPORTUNITY DATE &amp; TIME</div>
     <q-card>
       <div class="row">
         <div class="col-5 q-pa-md">
-          <q-input v-model="text" label="Start Date" stack-label :dense="dense" />
-          <q-input v-model="text" label="End Date" stack-label :dense="dense" />
+          <q-input v-model="start_date" label="Start Date" stack-label />
+          <q-input v-model="end_date" label="End Date" stack-label />
         </div>
         <div class="col-7 q-pa-md">
           <q-card-section>
@@ -165,6 +165,15 @@ export default {
   name: 'CreateAnOpportunityPage',
   data () {
     return {
+      opportunity_title: '',
+      opportunity_description: '',
+      opportunity_location: '',
+      skills_required_other: '',
+      background_check_requirements_other: '',
+      commitment_type_other: '',
+      clothing_requirements_other: '',
+      start_date: '',
+      end_date: '',
       model: '2019-02-15',
       model2: '2019-02-15',
       skills_required: skills_required,
