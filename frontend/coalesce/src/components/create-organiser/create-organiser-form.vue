@@ -17,8 +17,8 @@
             />
             <div class="organisation-type">
                 <p>What form of organisation do you represent?</p>
-                <div class="q-gutter-sm column">
-                    <q-radio v-for="({label, value}) in organisationTypes" :key="label" v-model="form" :val="value" :label="label" />
+                <div v-if="organisationTypes" class="q-gutter-sm column">
+                    <q-radio v-for="({label, value}) in organisationTypes" :key="label" v-model="organisationType" :val="value" :label="label" />
                 </div>
             </div>
             <div class="user-password">
@@ -49,7 +49,8 @@ export default {
       username: '',
       password: '',
       email: '',
-      organisationTypes
+      organisationTypes: null,
+      organisationType: ''
     }
   },
 
@@ -90,6 +91,10 @@ export default {
     createOrganiser () {
       // POST to endpoint
     }
+  },
+
+  mounted () {
+    this.organisationTypes = organisationTypes
   }
 }
 </script>

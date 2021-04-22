@@ -12,7 +12,7 @@
             <p class="text-weight-medium text-body-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor <br> incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
             <p class="text-weight-bold text-subtitle-2">
                 Not an organisation?
-                <NuxtLink class="volunteer-link" to="/">Register as a volunteer instead</NuxtLink>
+                <q-btn flat no-caps label="Register as a volunteer instead" class="volunteer-link" to="/" />
             </p>
             <q-btn unelevated no-caps class="submit-button q-mt-xl" style="" padding="8px 16px" text-color="white" label="Submit Profile" />
         </div>
@@ -27,17 +27,6 @@ export default {
   name: 'CreateOrganiser',
   components: {
     CreateOrganiserForm
-  },
-  data () {
-    return {
-      opportunities: '',
-      filter: '',
-      filterDate: ''
-    }
-  },
-  computed: {
-  },
-  methods: {
   }
 }
 </script>
