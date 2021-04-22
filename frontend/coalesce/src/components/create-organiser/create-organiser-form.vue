@@ -3,6 +3,7 @@
         <div class="grid-container">
             <div class="form-group">
                 <q-input v-model="organisationName" label="Organisation name" placeholder="Your Organisation name..." />
+                <p class="error" v-if="!$v.organisationName.minLength">Please enter an orgnaisation name longer than 1 character</p>
             </div>
             <div class="form-group">
                 <q-input v-model="websiteUrl" label="Do you have a website?" placeholder="Enter URL here..." />
@@ -24,7 +25,10 @@
                 <q-input v-model="username" label="Username" placeholder="Your Username..." />
                 <q-input v-model="password" type="password" label="Password" placeholder="Your Password..." />
             </div>
-            <q-input v-model="email" type="email" label="Email" placeholder="Your Email..." />
+            <div class="form-group">
+                <q-input v-model="email" type="email" label="Email" placeholder="Your Email..." />
+                <p class="error" v-if="!$v.email.email">Please enter a valid email address</p>
+            </div>
         </div>
         <q-btn type="submit" unelevated no-caps class="submit-button q-mt-xl" padding="8px 16px" text-color="white" label="Submit Profile" />
     </q-form>
@@ -36,6 +40,7 @@ import { email, minLength, required, url } from 'vuelidate/lib/validators'
 import { organisationTypes } from './utils/form-data'
 export default {
   name: 'CreateOrganiserForm',
+
   data () {
     return {
       organisationName: '',
@@ -47,34 +52,39 @@ export default {
       organisationTypes
     }
   },
+
   mixins: [
-      validationMixin
+    validationMixin
   ],
+
   validations: {
     organisationName: {
-        required,
-        minLength: minLength(2) 
+      required,
+      minLength: minLength(2)
     },
-    email: { 
-        required, 
-        email 
+
+    email: {
+      required,
+      email
     },
+
     websiteUrl: {
-        url
+      url
     }
   },
+
   methods: {
     createOrganiser () {
-        this.$v.$touch()
-        if (this.$v.$invalid) {
-            this.submitStatus = 'ERROR'
-        } else {
-            // do your submit logic here
-            this.submitStatus = 'PENDING'
-            setTimeout(() => {
-            this.submitStatus = 'OK'
-            }, 500)
-        }
+      this.$v.$touch()
+      if (this.$v.$invalid) {
+        this.submitStatus = 'ERROR'
+      } else {
+        // do your submit logic here
+        this.submitStatus = 'PENDING'
+        setTimeout(() => {
+          this.submitStatus = 'OK'
+        }, 500)
+      }
     }
   }
 }
