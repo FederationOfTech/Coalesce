@@ -7,7 +7,7 @@
       <div class="text-h5 text-weight-medium">A 100% open-source volunteer management platform...</div>
 
       <div class="row q-gutter-xl q-mt-md">
-        <q-btn to="/create-organiser" label="Register as an Organisation" color="primary" padding="md xl"></q-btn>
+        <q-btn to="/organisers/create" label="Register as an Organisation" color="primary" padding="md xl"></q-btn>
       </div>
     </div>
 

@@ -22,7 +22,7 @@
             </template>
           </q-input>
 
-          <q-btn to="/opportunity" class="q-ma-md" color="primary" label="Create an opportunity" size="lg" />
+          <q-btn to="/opportunities/create" class="q-ma-md" color="primary" label="Create an opportunity" size="lg" />
         </div>
 
         <!-- search results list -->
@@ -56,7 +56,7 @@
 
 <script>
 export default {
-  name: 'OrganizerDashboardPage',
+  name: 'OrganiserDashboardPage',
   data () {
     return {
       // The search input textbox value
