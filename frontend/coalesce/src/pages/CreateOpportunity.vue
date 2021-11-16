@@ -106,18 +106,11 @@
     <div class="text-overline q-py-md">OPPORTUNITY DATE &amp; TIME</div>
     <q-card>
       <div class="row">
-        <div class="col-5 q-pa-md">
-          <q-input v-model="start_date" label="Start Date" stack-label />
-          <q-input v-model="end_date" label="End Date" stack-label />
-        </div>
         <div class="col-7 q-pa-md">
           <q-card-section>
             <div class="row">
               <div class="q-pa-md">
-                <q-date v-model="model" mask="MM-DD-YYYY" />
-              </div>
-              <div class="q-pa-md">
-                <q-date v-model="model2" mask="MM-DD-YYYY" />
+                <q-date v-model="start_date" mask="YYYY-MM-DDThh:mm" />
               </div>
             </div>
           </q-card-section>
@@ -173,9 +166,6 @@ export default {
       commitment_type_other: '',
       clothing_requirements_other: '',
       start_date: '',
-      end_date: '',
-      model: '2019-02-15',
-      model2: '2019-02-15',
       skills_required: skills_required,
       skills_required_group: [],
       background_check_requirements: background_check_requirements,
@@ -191,21 +181,20 @@ export default {
   methods: {
     submitForm () {
       const body = {
-        datetime: Date.now(),
-        title: 'new org',
-        description: 'this has been created through the front end',
-        location: '',
-        organizers: 'Organizer Admin',
-        personnel_needed: 1,
-        skills_required: '',
-        commitment_type: '',
-        background_check_requirements: '',
-        clothing_requirements: '',
+        datetime: this.start_date,
+        title: this.opportunity_title,
+        description: this.opportunity_description,
+        location: this.opportunity_description,
+        organizers: [],
+        personnel_needed: this.personnel_needed_model,
+        skills_required: this.skills_required_group,
+        commitment_type: this.commitment_type_group.toString(),
+        background_check_requirements: this.background_check_requirements_group.toString(),
+        clothing_requirements: this.clothing_requirements_group.toString(),
         post_privacy: 'public'
       }
 
       const token = this.$store.state.auth.jwt.access
-      console.log(token)
 
       this.$axios.post('/api/v1/opportunities/', body,
         {
@@ -215,8 +204,7 @@ export default {
         }
       )
         .then((res) => {
-          console.log(res)
-          // redirct to opportunity page
+          this.$router.push('/opportunities/' + res.data.id)
         })
         .catch((err) => {
           console.log(err)
