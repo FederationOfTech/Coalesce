@@ -4,7 +4,7 @@
     <div class="text-body1 q-py-lg">A little bit of info about creating a volunteering opportunity</div>
 
     <div class="q-pb-lg">
-      <q-btn color="secondary" label="Submit Opportunity" />
+      <q-btn color="secondary" label="Submit Opportunity" value="Submit" @click="submitForm" />
     </div>
 
     <div class="text-overline">OPPORTUNITY DETAILS</div>
@@ -186,6 +186,41 @@ export default {
       clothing_requirements_group: [],
       personnel_needed_model: 0,
       personnel_needed: Array.from(Array(10).keys())
+    }
+  },
+  methods: {
+    submitForm () {
+      const body = {
+        datetime: Date.now(),
+        title: 'new org',
+        description: 'this has been created through the front end',
+        location: '',
+        organizers: 'Organizer Admin',
+        personnel_needed: 1,
+        skills_required: '',
+        commitment_type: '',
+        background_check_requirements: '',
+        clothing_requirements: '',
+        post_privacy: 'public'
+      }
+
+      const token = this.$store.state.auth.jwt.access
+      console.log(token)
+
+      this.$axios.post('/api/v1/opportunities/', body,
+        {
+          headers: {
+            Authorization: 'Bearer ' + token
+          }
+        }
+      )
+        .then((res) => {
+          console.log(res)
+          // redirct to opportunity page
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     }
   }
 }
