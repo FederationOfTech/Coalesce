@@ -204,5 +204,8 @@ class Common(Configuration):
         'DEFAULT_AUTHENTICATION_CLASSES': (
             'rest_framework.authentication.SessionAuthentication',
             'rest_framework.authentication.TokenAuthentication',
+            'rest_framework_simplejwt.authentication.JWTAuthentication',
         )
     }
+
+    CORS_ORIGIN_WHITELIST = ("localhost", "frontend")
