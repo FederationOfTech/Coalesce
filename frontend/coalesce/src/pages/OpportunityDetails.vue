@@ -71,7 +71,7 @@
             </div>
           </div>
 
-          <q-btn label="APPLY NOW" @click="clearDateFilter" class="full-width q-mt-lg" color="primary" />
+          <q-btn label="APPLY NOW" class="full-width q-mt-lg" color="primary" />
         </q-card>
       </div>
     </div>

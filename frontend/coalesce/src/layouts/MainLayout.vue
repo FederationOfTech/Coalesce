@@ -3,7 +3,7 @@
     <q-toolbar class="shadow-2">
       <img src="../assets/coalesce-logo.png">
       <div view="lHh Lpr lFf">
-        <q-tabs v-model="tab" shrink>
+        <q-tabs shrink>
           <q-route-tab to="/" name="home">Home</q-route-tab>
           <q-tab>
             <a target="_blank" href="https://www.federationof.tech/humanitarian-software">About</a>
@@ -16,7 +16,7 @@
       </div>
       <q-space />
       <div>
-        <q-tabs v-model="tab" shrink>
+        <q-tabs shrink>
           <q-route-tab to="/login" name="login">
             <q-btn type="submit" unelevated padding="8px 16px" label="Log In" />
           </q-route-tab>
