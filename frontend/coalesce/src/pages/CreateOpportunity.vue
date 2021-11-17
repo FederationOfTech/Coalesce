@@ -4,7 +4,7 @@
     <div class="text-body1 q-py-lg">A little bit of info about creating a volunteering opportunity</div>
 
     <div class="q-pb-lg">
-      <q-btn color="secondary" label="Submit Opportunity" />
+      <q-btn color="secondary" label="Submit Opportunity" value="Submit" @click="submitForm" />
     </div>
 
     <div class="text-overline">OPPORTUNITY DETAILS</div>
@@ -106,18 +106,11 @@
     <div class="text-overline q-py-md">OPPORTUNITY DATE &amp; TIME</div>
     <q-card>
       <div class="row">
-        <div class="col-5 q-pa-md">
-          <q-input v-model="start_date" label="Start Date" stack-label />
-          <q-input v-model="end_date" label="End Date" stack-label />
-        </div>
         <div class="col-7 q-pa-md">
           <q-card-section>
             <div class="row">
               <div class="q-pa-md">
-                <q-date v-model="model" mask="MM-DD-YYYY" />
-              </div>
-              <div class="q-pa-md">
-                <q-date v-model="model2" mask="MM-DD-YYYY" />
+                <q-date v-model="start_date" mask="YYYY-MM-DDThh:mm" />
               </div>
             </div>
           </q-card-section>
@@ -135,7 +128,6 @@ const skills_required = [
   { label: 'Arts & Communication', value: 'arts&communication' },
   { label: 'Science & Engineering', value: 'science&engineering' }
 ]
-
 const background_check_requirements = [
   { label: 'Criminal Record Check', value: 'criminalrecordcheck' },
   { label: 'Social Media Screening', value: 'socialmediascreening' },
@@ -144,14 +136,12 @@ const background_check_requirements = [
   { label: 'Reference Checks', value: 'referencechecks' },
   { label: 'Right to Work Checks', value: 'righttoworkchecks' }
 ]
-
 const commitment_type = [
   { label: 'One Time', value: 'onetime' },
   { label: 'Recurring', value: 'recurring' },
   { label: 'Fixed Ad-Hoc', value: 'fixedadhoc' },
   { label: 'Other', value: 'other' }
 ]
-
 const clothing_requirements = [
   { label: 'T-shirt', value: 'tshirt' },
   { label: 'Winterwear', value: 'winterwear' },
@@ -160,7 +150,6 @@ const clothing_requirements = [
   { label: 'Protective Footware', value: 'protectivefootware' },
   { label: 'Kitchen Apron', value: 'kitchenapron' }
 ]
-
 export default {
   name: 'CreateAnOpportunityPage',
   data () {
@@ -173,9 +162,6 @@ export default {
       commitment_type_other: '',
       clothing_requirements_other: '',
       start_date: '',
-      end_date: '',
-      model: '2019-02-15',
-      model2: '2019-02-15',
       skills_required: skills_required,
       skills_required_group: [],
       background_check_requirements: background_check_requirements,
@@ -186,6 +172,37 @@ export default {
       clothing_requirements_group: [],
       personnel_needed_model: 0,
       personnel_needed: Array.from(Array(10).keys())
+    }
+  },
+  methods: {
+    submitForm () {
+      const body = {
+        datetime: this.start_date,
+        title: this.opportunity_title,
+        description: this.opportunity_description,
+        location: this.opportunity_description,
+        organizers: [],
+        personnel_needed: this.personnel_needed_model,
+        skills_required: this.skills_required_group,
+        commitment_type: this.commitment_type_group.toString(),
+        background_check_requirements: this.background_check_requirements_group.toString(),
+        clothing_requirements: this.clothing_requirements_group.toString(),
+        post_privacy: 'public'
+      }
+      const token = this.$store.state.auth.jwt.access
+      this.$axios.post('/api/v1/opportunities/', body,
+        {
+          headers: {
+            Authorization: 'Bearer ' + token
+          }
+        }
+      )
+        .then((res) => {
+          this.$router.push('/opportunities/' + res.data.id)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     }
   }
 }
