@@ -9,7 +9,7 @@
                 </q-breadcrumbs>
             </div>
             <h1 class="text-weight-bolder text-h2">Register as an Organisation</h1>
-            <p class="text-weight-medium text-body-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor <br> incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+            <p class="text-weight-medium text-body-1">Try our out volunteer recruitment platform that is under developemt. You can register here and play with the features on offer.</p>
             <p class="text-weight-bold text-subtitle-2">
                 Not an organisation?
                 <q-btn flat no-caps label="Register as a volunteer instead" class="volunteer-link" to="/" />
