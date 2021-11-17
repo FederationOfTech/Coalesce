@@ -18,49 +18,17 @@
         </div>
     </div>
     <create-organiser-form />
-</q-page>
+  </q-page>
 </template>
 
 <script>
 import CreateOrganiserForm from '../components/create-organiser/create-organiser-form'
+import Banner from '../components/Banner.vue'
 export default {
   name: 'CreateOrganiser',
   components: {
-    CreateOrganiserForm
+    CreateOrganiserForm,
+    Banner
   }
 }
 </script>
-
-<style lang="scss">
-    .page-banner {
-        padding: 36px;
-
-        .banner-content {
-            max-width: 1280px;
-            margin: 0 auto;
-
-            .breadcrumbs {
-                font-weight: bold;
-                letter-spacing: 2px;
-                text-transform: uppercase;
-            }
-
-            h1 {
-                color: $font-primary;
-            }
-
-            .submit-button {
-                margin-top: 24px;
-                font-weight: bold;
-                color: white;
-                background: $accent;
-                border-radius: 8px;
-                min-width: 200px;
-            }
-
-            .volunteer-link {
-                color: $accent;
-            }
-        }
-    }
-</style>
